@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 240, 240, 240;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
+
+/* Additional styling for the Markdown preview */
+.prose {
+  max-width: 100%;
+}
+
+.prose pre {
+  background-color: #f3f4f6;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  overflow-x: auto;
+}
+
+.prose code {
+  font-family: monospace;
+  font-size: 0.875em;
+}
