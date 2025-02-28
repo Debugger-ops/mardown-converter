@@ -1,8 +1,10 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  // Other settings
-  reactStrictMode: true,
-  swcMinify: true,
-}
-
-module.exports = nextConfig;
+module.exports = {
+  webpack: (config) => {
+    config.snapshot = {
+      managedPaths: [
+        /node_modules\/@next\/swc-.*/,
+      ],
+    };
+    return config;
+  },
+};
