@@ -1,0 +1,260 @@
+/* Premium Markdown Converter Styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --editor-font: 'JetBrains Mono', monospace;
+  --ui-font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  /* Light theme variables */
+  --light-bg: #f9fafb;
+  --light-surface: #ffffff;
+  --light-border: #e5e7eb;
+  --light-text: #1f2937;
+  --light-text-secondary: #6b7280;
+  --light-accent: #3b82f6;
+  --light-accent-subtle: #eff6ff;
+  --light-success: #10b981;
+  
+  /* Dark theme variables */
+  --dark-bg: #111827;
+  --dark-surface: #1f2937;
+  --dark-border: #374151;
+  --dark-text: #f3f4f6;
+  --dark-text-secondary: #9ca3af;
+  --dark-accent: #3b82f6;
+  --dark-accent-subtle: #172554;
+  --dark-success: #059669;
+}
+
+body {
+  font-family: var(--ui-font);
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove default outline and replace with custom focus styles */
+*:focus {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--light-accent);
+  outline-offset: 2px;
+}
+
+.dark *:focus-visible {
+  outline: 2px solid var(--dark-accent);
+  outline-offset: 2px;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.3);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(156, 163, 175, 0.5);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background-color: rgba(75, 85, 99, 0.5);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(75, 85, 99, 0.7);
+}
+
+/* Textarea styling */
+textarea {
+  font-family: var(--editor-font);
+  line-height: 1.6;
+  tab-size: 2;
+  caret-color: var(--light-accent);
+}
+
+.dark textarea {
+  caret-color: var(--dark-accent);
+}
+
+/* Button effects */
+button {
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* Make editor fullscreen animation */
+.fullscreen-enter {
+  opacity: 0;
+  transform: scale(0.96);
+}
+
+.fullscreen-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 150ms, transform 150ms;
+}
+
+.fullscreen-exit {
+  opacity: 1;
+}
+
+.fullscreen-exit-active {
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 150ms, transform 150ms;
+}
+
+/* Prose overrides for better markdown previews */
+.prose pre {
+  padding: 1rem;
+  border-radius: 0.375rem;
+  background-color: #f3f4f6;
+  overflow-x: auto;
+}
+
+.prose-invert pre {
+  background-color: #374151;
+}
+
+.prose code {
+  font-family: var(--editor-font);
+  font-size: 0.875em;
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+  background-color: #f3f4f6;
+  color: #ef4444;
+}
+
+.prose-invert code {
+  background-color: #374151;
+  color: #f87171;
+}
+
+.prose pre code {
+  color: inherit;
+  background-color: transparent;
+  padding: 0;
+}
+
+.prose blockquote {
+  font-style: normal;
+  color: #4b5563;
+  border-left-color: #d1d5db;
+}
+
+.prose-invert blockquote {
+  color: #9ca3af;
+  border-left-color: #4b5563;
+}
+
+.prose img {
+  border-radius: 0.375rem;
+}
+
+.prose table {
+  border-collapse: collapse;
+  margin: 2em 0;
+  font-size: 0.875em;
+}
+
+.prose table th {
+  background-color: #f9fafb;
+  font-weight: 600;
+}
+
+.prose-invert table th {
+  background-color: #1f2937;
+}
+
+.prose table th,
+.prose table td {
+  padding: 0.625em 1em;
+  border: 1px solid #e5e7eb;
+}
+
+.prose-invert table th,
+.prose-invert table td {
+  border-color: #374151;
+}
+
+/* Syntax highlighting for code blocks */
+.syntax-keyword {
+  color: #8b5cf6;
+}
+
+.syntax-string {
+  color: #10b981;
+}
+
+.syntax-comment {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.syntax-number {
+  color: #f59e0b;
+}
+
+.syntax-function {
+  color: #3b82f6;
+}
+
+/* Copy button animation */
+@keyframes copySuccess {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.copy-success {
+  animation: copySuccess 0.5s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .prose {
+    font-size: 0.875rem;
+  }
+}
+
+/* Improved card shadows with subtle animation */
+.shadow-xl {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  transition: box-shadow 0.3s ease;
+}
+
+.shadow-xl:hover {
+  box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.07), 0 10px 15px -5px rgba(0, 0, 0, 0.02);
+}
+
+.dark .shadow-xl {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.dark .shadow-xl:hover {
+  box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.3), 0 10px 15px -5px rgba(0, 0, 0, 0.15);
+}
