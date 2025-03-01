@@ -108,7 +108,7 @@ export default function MarkdownConverter() {
         <header className="header">
           <div className="logo-container">
             <div className={`logo-icon ${theme}`}>
-              <span className="logo-text">M</span>
+              <span className="logo-text">MS</span>
             </div>
             <h1 className="app-title">Markdown Studio</h1>
           </div>
