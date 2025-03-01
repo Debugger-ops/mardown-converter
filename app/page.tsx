@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, ChangeEvent } from 'react';
 import { remark } from 'remark';
 import html from 'remark-html';
 import './page.css';
+
 export default function MarkdownConverter() {
   const [markdown, setMarkdown] = useState<string>('# Hello World\n\nThis is a **bold** statement and this is *italic*.\n\n## Lists\n\n- Item 1\n- Item 2\n  - Nested item\n\n## Code\n\n```javascript\nconst greeting = "Hello, world!";\nconsole.log(greeting);\n```\n\n## Links\n\n[Visit GitHub](https://github.com)');
   const [htmlOutput, setHtmlOutput] = useState<string>('');
@@ -101,36 +102,28 @@ export default function MarkdownConverter() {
   };
 
   return (
-    <main className={`min-h-screen transition-colors duration-300 ${
-      theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-800'
-    } ${isFullscreen ? 'fixed inset-0 z-50' : ''}`}>
-      <div className="container mx-auto py-6 px-4 h-full flex flex-col">
+    <main className={`main ${theme} ${isFullscreen ? 'fullscreen' : ''}`}>
+      <div className="container">
         {/* Header */}
-        <header className="mb-6 flex justify-between items-center">
-          <div className="flex items-center space-x-3">
-            <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-              theme === 'dark' ? 'bg-blue-600' : 'bg-blue-500'
-            }`}>
-              <span className="text-white text-xl font-bold">M</span>
+        <header className="header">
+          <div className="logo-container">
+            <div className={`logo-icon ${theme}`}>
+              <span className="logo-text">M</span>
             </div>
-            <h1 className="text-2xl font-bold tracking-tight">Markdown Studio</h1>
+            <h1 className="app-title">Markdown Studio</h1>
           </div>
           
-          <div className="flex items-center space-x-2">
+          <div className="header-buttons">
             <button
               onClick={toggleFullscreen}
-              className={`p-2 rounded-md ${
-                theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-gray-200'
-              }`}
+              className={`icon-button ${theme}`}
               aria-label="Toggle fullscreen"
             >
               {isFullscreen ? '🗕' : '🗖'}
             </button>
             <button
               onClick={toggleTheme}
-              className={`p-2 rounded-md ${
-                theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-gray-200'
-              }`}
+              className={`icon-button ${theme}`}
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? '☀️' : '🌙'}
@@ -139,96 +132,54 @@ export default function MarkdownConverter() {
         </header>
         
         {/* Editor Controls */}
-        <div className={`mb-4 flex flex-wrap items-center justify-between rounded-t-lg p-2 ${
-          theme === 'dark' ? 'bg-gray-800' : 'bg-white'
-        } shadow-sm`}>
-          <div className="flex space-x-1">
+        <div className={`editor-controls ${theme}`}>
+          <div className="view-toggles">
             <button
               onClick={() => setViewMode('edit')}
-              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                viewMode === 'edit' 
-                  ? theme === 'dark' 
-                    ? 'bg-gray-700 text-blue-400' 
-                    : 'bg-blue-100 text-blue-700' 
-                  : theme === 'dark'
-                    ? 'text-gray-400 hover:bg-gray-700'
-                    : 'text-gray-700 hover:bg-gray-100'
-              }`}
+              className={`view-toggle-button ${viewMode === 'edit' ? 'active' : ''} ${theme}`}
             >
               Edit
             </button>
             <button
               onClick={() => setViewMode('split')}
-              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                viewMode === 'split' 
-                  ? theme === 'dark' 
-                    ? 'bg-gray-700 text-blue-400' 
-                    : 'bg-blue-100 text-blue-700' 
-                  : theme === 'dark'
-                    ? 'text-gray-400 hover:bg-gray-700'
-                    : 'text-gray-700 hover:bg-gray-100'
-              }`}
+              className={`view-toggle-button ${viewMode === 'split' ? 'active' : ''} ${theme}`}
             >
               Split
             </button>
             <button
               onClick={() => setViewMode('preview')}
-              className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                viewMode === 'preview' 
-                  ? theme === 'dark' 
-                    ? 'bg-gray-700 text-blue-400' 
-                    : 'bg-blue-100 text-blue-700' 
-                  : theme === 'dark'
-                    ? 'text-gray-400 hover:bg-gray-700'
-                    : 'text-gray-700 hover:bg-gray-100'
-              }`}
+              className={`view-toggle-button ${viewMode === 'preview' ? 'active' : ''} ${theme}`}
             >
               Preview
             </button>
           </div>
           
-          <div className={`flex flex-wrap mt-2 sm:mt-0 ${viewMode === 'preview' ? 'hidden' : ''}`}>
-            <div className="flex space-x-1">
+          <div className={`template-buttons ${viewMode === 'preview' ? 'hidden' : ''}`}>
+            <div className="template-button-group">
               <button
                 onClick={() => insertTemplate('table')}
-                className={`p-2 rounded-md text-xs ${
-                  theme === 'dark' 
-                    ? 'bg-gray-700 hover:bg-gray-600 text-gray-300' 
-                    : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
-                }`}
+                className={`template-button ${theme}`}
                 title="Insert table"
               >
                 Table
               </button>
               <button
                 onClick={() => insertTemplate('codeblock')}
-                className={`p-2 rounded-md text-xs ${
-                  theme === 'dark' 
-                    ? 'bg-gray-700 hover:bg-gray-600 text-gray-300' 
-                    : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
-                }`}
+                className={`template-button ${theme}`}
                 title="Insert code block"
               >
                 Code
               </button>
               <button
                 onClick={() => insertTemplate('quote')}
-                className={`p-2 rounded-md text-xs ${
-                  theme === 'dark' 
-                    ? 'bg-gray-700 hover:bg-gray-600 text-gray-300' 
-                    : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
-                }`}
+                className={`template-button ${theme}`}
                 title="Insert blockquote"
               >
                 Quote
               </button>
               <button
                 onClick={() => insertTemplate('image')}
-                className={`p-2 rounded-md text-xs ${
-                  theme === 'dark' 
-                    ? 'bg-gray-700 hover:bg-gray-600 text-gray-300' 
-                    : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
-                }`}
+                className={`template-button ${theme}`}
                 title="Insert image"
               >
                 Image
@@ -238,69 +189,43 @@ export default function MarkdownConverter() {
         </div>
         
         {/* Main Content Area */}
-        <div className={`flex-1 overflow-hidden rounded-b-lg shadow-xl ${
-          theme === 'dark' ? 'bg-gray-800 shadow-gray-900/30' : 'bg-white shadow-gray-200/60'
-        }`}>
-          <div className={`h-full flex ${
-            viewMode === 'split' ? 'flex-col md:flex-row' : 'flex-col'
-          }`}>
+        <div className={`content-area ${theme}`}>
+          <div className={`panels-container ${viewMode}`}>
             {/* Editor Panel */}
-            <div className={`${
-              viewMode === 'preview' ? 'hidden' : 
-              viewMode === 'split' ? 'h-1/2 md:h-auto md:w-1/2' : 'flex-1'
-            } flex flex-col border-b md:border-b-0 ${
-              theme === 'dark' ? 'md:border-r border-gray-700' : 'md:border-r border-gray-200'
-            }`}>
-              <div className="p-3 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
-                <div className="text-sm font-medium">Markdown</div>
-                <div className="text-xs text-gray-500 dark:text-gray-400">
+            <div className={`editor-panel ${viewMode} ${theme}`}>
+              <div className="panel-header">
+                <div className="panel-title">Markdown</div>
+                <div className="character-count">
                   {markdown.length} characters
                 </div>
               </div>
               
-              <div className="flex-1 overflow-hidden">
+              <div className="editor-container">
                 <textarea
                   ref={editorRef}
                   value={markdown}
                   onChange={handleMarkdownChange}
-                  className={`w-full h-full p-4 resize-none focus:outline-none font-mono text-sm leading-relaxed ${
-                    theme === 'dark' 
-                      ? 'bg-gray-800 text-gray-200' 
-                      : 'bg-white text-gray-800'
-                  }`}
+                  className={`editor-textarea ${theme}`}
                   placeholder="Enter your Markdown here..."
                 />
               </div>
             </div>
             
             {/* Preview Panel */}
-            <div className={`${
-              viewMode === 'edit' ? 'hidden' : 
-              viewMode === 'split' ? 'h-1/2 md:h-auto md:w-1/2' : 'flex-1'
-            } flex flex-col`}>
-              <div className="p-3 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
-                <div className="text-sm font-medium">Preview</div>
+            <div className={`preview-panel ${viewMode} ${theme}`}>
+              <div className="panel-header">
+                <div className="panel-title">Preview</div>
                 <button
                   onClick={copyHtmlToClipboard}
-                  className={`text-xs px-3 py-1 rounded-md transition-colors ${
-                    isCopied 
-                      ? theme === 'dark' 
-                        ? 'bg-green-700 text-green-100' 
-                        : 'bg-green-100 text-green-800'
-                      : theme === 'dark'
-                        ? 'bg-gray-700 hover:bg-gray-600 text-gray-300'
-                        : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
-                  }`}
+                  className={`copy-button ${isCopied ? 'copied' : ''} ${theme}`}
                 >
                   {isCopied ? 'Copied!' : 'Copy HTML'}
                 </button>
               </div>
               
-              <div className="flex-1 overflow-auto">
+              <div className="preview-container">
                 <div 
-                  className={`prose max-w-none h-full p-4 ${
-                    theme === 'dark' ? 'prose-invert' : ''
-                  }`}
+                  className={`markdown-preview ${theme}`}
                   dangerouslySetInnerHTML={{ __html: htmlOutput }}
                 />
               </div>
@@ -309,42 +234,26 @@ export default function MarkdownConverter() {
         </div>
         
         {/* HTML Output Section */}
-        <div className={`mt-6 rounded-lg shadow-lg overflow-hidden ${
-          theme === 'dark' ? 'bg-gray-800' : 'bg-white'
-        }`}>
-          <div className="p-3 flex justify-between items-center border-b border-gray-200 dark:border-gray-700">
-            <div className="text-sm font-medium">HTML Output</div>
+        <div className={`html-output-container ${theme}`}>
+          <div className="panel-header">
+            <div className="panel-title">HTML Output</div>
             <button
               onClick={copyHtmlToClipboard}
-              className={`text-xs px-3 py-1 rounded-md transition-colors ${
-                isCopied 
-                  ? theme === 'dark' 
-                    ? 'bg-green-700 text-green-100' 
-                    : 'bg-green-100 text-green-800'
-                  : theme === 'dark'
-                    ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                    : 'bg-blue-500 hover:bg-blue-600 text-white'
-              }`}
+              className={`copy-button primary ${isCopied ? 'copied' : ''} ${theme}`}
             >
               {isCopied ? 'Copied!' : 'Copy to Clipboard'}
             </button>
           </div>
           
-          <div className="relative">
+          <div className="html-textarea-container">
             <textarea
               value={htmlOutput}
               readOnly
-              className={`w-full h-32 p-4 resize-none focus:outline-none font-mono text-xs ${
-                theme === 'dark' 
-                  ? 'bg-gray-800 text-gray-300' 
-                  : 'bg-gray-50 text-gray-800'
-              }`}
+              className={`html-textarea ${theme}`}
             />
             
-            <div className="absolute top-2 right-2">
-              <span className={`text-xs px-2 py-1 rounded-md ${
-                theme === 'dark' ? 'bg-gray-700 text-gray-400' : 'bg-gray-200 text-gray-600'
-              }`}>
+            <div className="html-label">
+              <span className={`language-tag ${theme}`}>
                 HTML
               </span>
             </div>
@@ -352,8 +261,8 @@ export default function MarkdownConverter() {
         </div>
         
         {/* Footer */}
-        <footer className="mt-6 text-center text-xs text-gray-500 dark:text-gray-400 py-4">
-          <p>✨ Markdown Studio • Built with Next.js and Tailwind CSS</p>
+        <footer className="footer">
+          <p>✨ Markdown Studio • Built with Next.js and CSS</p>
         </footer>
       </div>
     </main>
