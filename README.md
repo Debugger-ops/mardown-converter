@@ -29,7 +29,7 @@ yarn add html-to-markdown-converter
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/username/html-to-markdown-converter.git
+   git clone https://github.com/debugger/html-to-markdown-converter.git
    ```
 2. Navigate to the project directory:
    ```bash
