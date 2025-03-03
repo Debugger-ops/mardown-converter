@@ -10,6 +10,7 @@ A lightweight, efficient tool that converts HTML documents into clean, well-form
 - **Clean Output**: Produces readable, minimal Markdown without unnecessary whitespace
 - **Batch Processing**: Convert multiple files or entire directories at once
 - **CLI & API Support**: Use as a command-line tool or integrate into your application
+- **Dark Mode**: Ability to toggle between light and dark mode
 
 ## Installation
 
@@ -29,7 +30,7 @@ yarn add html-to-markdown-converter
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/debugger/html-to-markdown-converter.git
+   git clone https://github.com/debugger-ops/html-to-markdown-converter.git
    ```
 2. Navigate to the project directory:
    ```bash
