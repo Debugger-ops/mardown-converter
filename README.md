@@ -82,18 +82,7 @@ const options = {
 const markdownWithOptions = html2md.convert(htmlString, options);
 ```
 
-## Configuration Options
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `gfm` | Boolean | `true` | Use GitHub Flavored Markdown |
-| `bulletListMarker` | String | `-` | Character to use for bullet lists (`-`, `*`, or `+`) |
-| `codeBlockStyle` | String | `fenced` | Code block style (`fenced` or `indented`) |
-| `emDelimiter` | String | `*` | Character for emphasis (`*` or `_`) |
-| `strongDelimiter` | String | `**` | Character for strong emphasis (`**` or `__`) |
-| `linkReferenceStyle` | String | `inlined` | Link style (`inlined`, `referenced`, or `collapsed`) |
-| `preserveImageSize` | Boolean | `false` | Preserve image dimensions when converting |
-| `tableStyle` | String | `pipe` | Table style (`pipe` or `simple`) |
 
 ## Element Support
 
