@@ -1,4 +1,4 @@
-# HTML to Markdown Converter
+# HTML Markdown Converter
 
 A lightweight, efficient tool that converts HTML documents into clean, well-formatted Markdown.
 
